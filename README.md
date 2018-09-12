@@ -21,3 +21,5 @@ python logstats.py -f input.txt -o output.txt -r 0.9
 
 ## Example
 ![Sample output](https://github.com/cbriguet/logstats/blob/master/logstats_sample.png)
+![Sample output](https://cbriguet.github.io/logstats/logstats_sample.png)
+
