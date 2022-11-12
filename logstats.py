@@ -9,6 +9,9 @@ import Levenshtein
 import pickle
 import argparse
 
+import tlsh
+
+
 parser = argparse.ArgumentParser()
 
 parser.add_argument("-f", "--file", dest="file",help="input file name")
@@ -87,13 +90,13 @@ while line:
 		msgTypeCounter[line] = 1
 		msgType2ID[line] = msgType_id
 		msgType_id += 1
-		print "New type of message discovered line #%s:" %counter
-		print line
-		print '\n'
+		print ("New type of message discovered line #%s:" %counter)
+		print (line)
+		print ('\n')
 				
 	line = f.readline()
 	if (counter%100 == 0):
-		print "%s lines analyzed..." %counter
+		print ("%s lines analyzed..." %counter)
 	counter += 1
 
 f.close()
@@ -106,34 +109,34 @@ raw_input('Type Enter to display discovered types...')
 outputfile=open(args.output,"w")
 sortedList=[]
 #Sort msgType by popularity
-for key1 in sorted(msgTypeCounter.iteritems(), reverse=True, key=lambda (k,v): (v,k)):
+
+
+for key1 in sorted (msgTypeCounter.iteritems(), reverse=True, key=lambda k,v:(v,k)):
 	numberOfOccurence = msgTypeCounter[key1[0]]
 	msgID = msgType2ID[key1[0]]
 	percentageOfOccurence= (numberOfOccurence / float(counter))*100
 	stringPercentageOfOccurence="%.2f" % percentageOfOccurence
-	print "Message UID = %s" % (msgID) 
+	print ("Message UID = %s" % (msgID))
 	outputfile.write("Message UID = %s" % (msgID))
-	print "Number of similar message = %s (%s%%)\n" % (numberOfOccurence-1,stringPercentageOfOccurence)
+	print ("Number of similar message = %s (%s%%)\n" % (numberOfOccurence-1,stringPercentageOfOccurence))
 	outputfile.write("\nNumber of similar message = %s (%s%%)\n" % (numberOfOccurence-1,stringPercentageOfOccurence))
-	print "Message type:"
+	print ("Message type:")
 	outputfile.write("Message type:\n")
-	print "----------------\n"
+	print ("----------------\n")
 	outputfile.write("----------------\n")
-	print key1[0]
+	print (key1[0])
 	outputfile.write(key1[0])
 	if numberOfOccurence >1:
-		print "\n\nOther sample of similar messages:"
+		print ("\n\nOther sample of similar messages:")
 		outputfile.write("\n\nOther sample of similar messages:\n")
-		print "-----------------------------\n"
+		print ("-----------------------------\n")
 		outputfile.write("-----------------------------\n")
-
-    	for key2 in sorted(msgType[key1[0]].iteritems(), key=lambda (k,v): (v,k)):
-    	
+		for key2 in sorted(msgType[key1[0]].iteritems(), key=lambda k,v: (v,k)):
     	 		#print msgType[key1[0]][key2[0]]
     	 		print (key2[0])
     	 		outputfile.write(key2[0]+'\n')
         	
-	print "______________________________________________________________________________________________________________________________________\n"
+	print ("______________________________________________________________________________________________________________________________________\n")
 	outputfile.write("______________________________________________________________________________________________________________________________________\n\n")
 outputfile.close
 
