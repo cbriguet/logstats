@@ -4,10 +4,9 @@ Automated classification of unstructured log records
 This Python script can automatically discover message types from sample log files. It supports the Levenshtein distance and  Trend Micro Locality Sensitive Hash (TLSH) methods for measuring the similarity between two sequences.
 
 ## Prerequisites
-```
 https://pypi.org/project/python-Levenshtein/
+
 https://pypi.org/project/py-tlsh/
-```
 
 ## Usage
 ```
