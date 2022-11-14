@@ -5,6 +5,7 @@ This Python script can be used to automatically discover message types from samp
 
 
 ## Prerequisites
+```
 https://pypi.org/project/python-Levenshtein/
 https://pypi.org/project/py-tlsh/
 ```
