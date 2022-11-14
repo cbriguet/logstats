@@ -71,9 +71,9 @@ while line:
 					else:
 						myresult=1
 					
-					print (line)
-					print (h1 + "    "+ h2 + " -> " + str(myresult))
-					print ("\n\n\n")
+					#print (line)
+					#print (h1 + "    "+ h2 + " -> " + str(myresult))
+					#print ("\n\n\n")
 
 		else:
 			myresult = 0
