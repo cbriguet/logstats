@@ -5,17 +5,16 @@
 # python setup.py install
 # Author : Christophe Briguet
 
-import Levenshtein
 import pickle
 import argparse
-
 import tlsh
-
+from Levenshtein import ratio
 
 parser = argparse.ArgumentParser()
 
 parser.add_argument("-f", "--file", dest="file",help="input file name")
 parser.add_argument("-o", "--output", dest="output",help="output file name")
+parser.add_argument("-m", "--method", dest="method",default="distance",help="method use to evaluate similarity (i.e., distance or tlsh)")
 parser.add_argument("-s", "--skip", dest="skip", default="34",type=int,help="Skip n first charcter from header (35 by default)")
 parser.add_argument("-r", "--ratio", dest="ratio", default="	",type=float,help="Levenshtein ratio (0.9 by default)")
 parser.add_argument("-p", "--print", dest="sample", default="3",type=int,help="Print n first sample record (3 by default)")
@@ -25,6 +24,7 @@ args = parser.parse_args()
 msgType={}
 msgTypeCounter={}
 msgType2ID = {}
+
 
 # Ideally the ratio threshold should be adjusted according to data set	 	
 THR = args.ratio 
@@ -55,8 +55,27 @@ while line:
 		# Remove n first characters (e.g. header, timestamp)
 		tmpline = line [args.skip:]
 		tmpkey = key [args.skip:]				
-		# Compute the Levenshtein ratio between the two strings
-		myresult = Levenshtein.ratio(tmpline,tmpkey)
+		
+		if (args.method == "distance"):
+				# Compute the Levenshtein ratio between the two strings
+				myresult = ratio(tmpline,tmpkey)
+
+		elif (args.method == "tlsh"):
+				# Compute the diff between two hashes
+				h1 = tlsh.hash(str.encode(tmpline))
+				h2 = tlsh.hash(str.encode(tmpkey))
+				
+				#print (line)
+				#print (h1)
+				#print (h2)
+				if (h1 != "TNULL" and h2 != "TNULL"):
+					#print (tlsh.diff(h1, h2))
+					myresult = tlsh.diff(h1, h2)
+				
+
+		else:
+			myresult = 0
+
 		if (myresult > THR):
 		# Current line is very similar with one from the list
 			save_key = key
@@ -104,14 +123,14 @@ f.close()
 print ("%d lines analyzed" %counter)
 print ("%d message types discovered" %len(msgType))
 
-raw_input('Type Enter to display discovered types...')
+input('Type Enter to display discovered types...')
 
 outputfile=open(args.output,"w")
 sortedList=[]
 #Sort msgType by popularity
 
 
-for key1 in sorted (msgTypeCounter.iteritems(), reverse=True, key=lambda k,v:(v,k)):
+for key1 in sorted (iter(msgTypeCounter.items()), reverse=True, key=lambda kv: kv[1]):
 	numberOfOccurence = msgTypeCounter[key1[0]]
 	msgID = msgType2ID[key1[0]]
 	percentageOfOccurence= (numberOfOccurence / float(counter))*100
@@ -131,7 +150,7 @@ for key1 in sorted (msgTypeCounter.iteritems(), reverse=True, key=lambda k,v:(v,
 		outputfile.write("\n\nOther sample of similar messages:\n")
 		print ("-----------------------------\n")
 		outputfile.write("-----------------------------\n")
-		for key2 in sorted(msgType[key1[0]].iteritems(), key=lambda k,v: (v,k)):
+		for key2 in sorted(iter(msgType[key1[0]].items()), key=lambda kv: kv[1]):
     	 		#print msgType[key1[0]][key2[0]]
     	 		print (key2[0])
     	 		outputfile.write(key2[0]+'\n')
