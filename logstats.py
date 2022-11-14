@@ -63,9 +63,17 @@ while line:
 				h1 = tlsh.hash(str.encode(tmpline))
 				h2 = tlsh.hash(str.encode(tmpkey))
 				if (h1 != "TNULL" and h2 != "TNULL"):
-					#print (tlsh.diff(h1, h2))
 					myresult = tlsh.diff(h1, h2)
-				
+
+					if myresult > 0:
+						myresult = 1/myresult
+					
+					else:
+						myresult=1
+					
+					print (line)
+					print (h1 + "    "+ h2 + " -> " + str(myresult))
+					print ("\n\n\n")
 
 		else:
 			myresult = 0
