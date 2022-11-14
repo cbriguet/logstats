@@ -1,8 +1,6 @@
 #!/usr/bin/python
-#you need Levenshtein
-#get it from http://code.google.com/p/pylevenshtein/
-# python setup.py build
-# python setup.py install
+# you need Levenshtein from https://pypi.org/project/python-Levenshtein/
+# and TLHS from https://pypi.org/project/py-tlsh/
 # Author : Christophe Briguet
 
 import pickle
