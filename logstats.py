@@ -1,6 +1,6 @@
 #!/usr/bin/python
 # you need Levenshtein from https://pypi.org/project/python-Levenshtein/
-# and TLHS from https://pypi.org/project/py-tlsh/
+# and TLSH from https://pypi.org/project/py-tlsh/
 # Author : Christophe Briguet
 
 import pickle
