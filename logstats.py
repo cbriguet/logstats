@@ -62,10 +62,6 @@ while line:
 				# Compute the diff between two hashes
 				h1 = tlsh.hash(str.encode(tmpline))
 				h2 = tlsh.hash(str.encode(tmpkey))
-				
-				#print (line)
-				#print (h1)
-				#print (h2)
 				if (h1 != "TNULL" and h2 != "TNULL"):
 					#print (tlsh.diff(h1, h2))
 					myresult = tlsh.diff(h1, h2)
