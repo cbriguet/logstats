@@ -23,7 +23,7 @@ For the distance method, [-r] is the minimum number of difference to consider th
 ```
 python3 logstats.py -f input.txt -o output.txt -r 30 -m tlsh -v
 ```
-For the tlsh method, [-r] is the minimum TLSH distance score to consider the strings similar.
+For the tlsh method, [-r] is the minimum TLSH distance score (a.k.a. radius) to consider the strings similar.
 0 for perfect match, 1 .. 50 for near perfect (1) to good match (50), 51 .. 100	for possible matches and 2000 for very distant strings.
 
 
