@@ -17,8 +17,8 @@ parser.add_argument("-m", "--method", dest="method",default="distance",help="met
 parser.add_argument("-s", "--skip", dest="skip", default="0",type=int,help="Skip n first character from header (0 by default)")
 parser.add_argument("-r", "--ratio", dest="ratio", default="	",type=float,help="'distance' or 'distance-ratio' for Levenshtein and 'distance' for TLSH")
 parser.add_argument("-p", "--print", dest="sample", default="3",type=int,help="Print n first sample record (3 by default), need verbose mode enabled")
-parser.add_argument("-v", "--verbose", dest="verbose", default=False,help="Verbose mode")
-parser.add_argument("-S", "--stats", dest="stats", default=False,help="Statistic mode")
+parser.add_argument("-v", "--verbose", dest="verbose",help="Verbose mode",action='store_true')
+parser.add_argument("-S", "--stats", dest="stats",help="Statistic mode",action='store_true')
 
 args = parser.parse_args()
 
