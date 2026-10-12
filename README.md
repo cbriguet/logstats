@@ -1,6 +1,8 @@
 # Logstats
 Automated classification of unstructured log records
 
+> **In a browser now:** [logcaliper.app/profiler](https://logcaliper.app/profiler/) does this job on a log sample with Drain, the log-parsing algorithm, in your browser with nothing uploaded, and adds the bytes per event, the events per second and what a year of the log takes to keep. This script stays as it is, for edit-distance and TLSH classification from the command line.
+
 This Python script can automatically discover message types from sample log files. It supports the Levenshtein distance / distance-ratio and Trend Micro Locality Sensitive Hash (TLSH) methods for measuring the similarity between two sequences.
 
 ## Prerequisites
